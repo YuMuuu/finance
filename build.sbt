@@ -1,3 +1,5 @@
+import sbt.Keys.libraryDependencies
+
 val scala3Version = "3.7.4"
 
 lazy val root = project
@@ -9,4 +11,16 @@ lazy val root = project
     scalaVersion := scala3Version,
 
     libraryDependencies += "org.scalameta" %% "munit" % "1.0.0" % Test
+  )
+
+lazy val core = project
+  .in(file("core"))
+  .settings(
+    scalaVersion := scala3Version,
+    libraryDependencies ++=
+      Seq(
+        "org.apache.spark" % "spark-core_2.13" % "4.1.0",
+        "org.apache.spark" % "spark-sql_2.13" % "4.1.0",
+        "org.typelevel" %% "cats-core" % "2.13.0",
+      )
   )
